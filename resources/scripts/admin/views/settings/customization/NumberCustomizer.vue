@@ -299,6 +299,16 @@ const allFields = ref([
     inputType: 'number',
     allowMultiple: false,
   },
+  {
+    label: t('settings.customization.month_sequence'),
+    description: t('settings.customization.month_sequence_description'),
+    name: 'MONTH_SEQUENCE',
+    paramLabel: t('settings.customization.month_sequence_param_label'),
+    value: '',
+    inputDisabled: false,
+    inputType: 'number',
+    allowMultiple: false,
+  },
 ])
 
 const computedFields = computed(() => {

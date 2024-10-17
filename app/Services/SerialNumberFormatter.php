@@ -12,7 +12,7 @@ use Crater\Models\Customer;
 
 class SerialNumberFormatter
 {
-    public const VALID_PLACEHOLDERS = ['CUSTOMER_SERIES', 'SEQUENCE', 'DATE_FORMAT', 'SERIES', 'RANDOM_SEQUENCE', 'DELIMITER', 'CUSTOMER_SEQUENCE'];
+    public const VALID_PLACEHOLDERS = ['CUSTOMER_SERIES', 'SEQUENCE', 'DATE_FORMAT', 'SERIES', 'RANDOM_SEQUENCE', 'DELIMITER', 'CUSTOMER_SEQUENCE', 'MONTH_SEQUENCE'];
 
     private $model;
 
@@ -31,6 +31,11 @@ class SerialNumberFormatter
      * @var string
      */
     public $nextCustomerSequenceNumber;
+
+    /**
+     * @var string
+     */
+    public $nextMonthSequenceNumber;
 
     /**
      * @param $model
@@ -114,6 +119,9 @@ class SerialNumberFormatter
         $this->nextCustomerSequenceNumber ?
             $this->nextCustomerSequenceNumber : $this->setNextCustomerSequenceNumber();
 
+        $this->nextMonthSequenceNumber ?
+            $this->nextMonthSequenceNumber : $this->setNextMonthSequenceNumber();
+
         return $this;
     }
 
@@ -150,6 +158,17 @@ class SerialNumberFormatter
             ->first();
 
         $this->nextCustomerSequenceNumber = ($last) ? $last->customer_sequence_number + 1 : 1;
+
+        return $this;
+    }
+
+    public function setNextMonthSequenceNumber()
+    {
+        $last = $this->model::where('company_id', $this->company)
+            ->where("created_at", ">=", now()->startOfMonth())
+            ->count();
+
+        $this->nextMonthSequenceNumber = $last + 1;
 
         return $this;
     }
@@ -223,6 +242,10 @@ class SerialNumberFormatter
                         break;
                     case "CUSTOMER_SEQUENCE":
                         $serialNumber .= str_pad($this->nextCustomerSequenceNumber, $value, 0, STR_PAD_LEFT);
+
+                        break;
+                    case "MONTH_SEQUENCE":
+                        $serialNumber .= str_pad($this->nextMonthSequenceNumber, $value, 0, STR_PAD_LEFT);
 
                         break;
                     default:

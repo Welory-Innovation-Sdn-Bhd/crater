@@ -949,6 +949,9 @@
       "random_sequence": "Random Sequence",
       "random_sequence_description": "Random alphanumeric string. You can specify the length on the given parameter.",
       "random_sequence_param_label": "Sequence Length",
+      "month_sequence": "Month Series",
+      "month_sequence_description": "Consecutive sequence of numbers for each month. You can specify the length on the given parameter.",
+      "month_sequence_param_label": "Sequence Length",
       "invoices": {
         "title": "Invoices",
         "invoice_number_format": "Invoice Number Format",
