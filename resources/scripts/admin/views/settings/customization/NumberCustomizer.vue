@@ -304,7 +304,7 @@ const allFields = ref([
     description: t('settings.customization.month_sequence_description'),
     name: 'MONTH_SEQUENCE',
     paramLabel: t('settings.customization.month_sequence_param_label'),
-    value: '',
+    value: '2',
     inputDisabled: false,
     inputType: 'number',
     allowMultiple: false,
