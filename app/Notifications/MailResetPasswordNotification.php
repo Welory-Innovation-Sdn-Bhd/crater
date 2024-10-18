@@ -4,11 +4,12 @@ namespace Crater\Notifications;
 
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 use Illuminate\Notifications\Notification;
 
-class MailResetPasswordNotification extends ResetPassword
+class MailResetPasswordNotification extends ResetPassword implements ShouldQueue
 {
     use Queueable;
 
