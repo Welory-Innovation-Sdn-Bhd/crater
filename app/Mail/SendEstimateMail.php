@@ -5,11 +5,12 @@ namespace Crater\Mail;
 use Crater\Models\EmailLog;
 use Crater\Models\Estimate;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Vinkla\Hashids\Facades\Hashids;
 
-class SendEstimateMail extends Mailable
+class SendEstimateMail extends Mailable implements ShouldQueue
 {
     use Queueable;
     use SerializesModels;
