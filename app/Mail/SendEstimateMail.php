@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Vinkla\Hashids\Facades\Hashids;
 
-class SendEstimateMail extends Mailable implements ShouldQueue
+class SendEstimateMail extends Mailable
 {
     use Queueable;
     use SerializesModels;
