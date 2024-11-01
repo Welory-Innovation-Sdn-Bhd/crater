@@ -165,7 +165,7 @@ class SerialNumberFormatter
     public function setNextMonthSequenceNumber()
     {
         $last = $this->model::where('company_id', $this->company)
-            ->where("created_at", ">=", now()->startOfMonth())
+            ->where("invoice_date", ">=", now()->startOfMonth())
             ->count();
 
         $this->nextMonthSequenceNumber = $last + 1;
