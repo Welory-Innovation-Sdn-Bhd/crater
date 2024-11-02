@@ -4,6 +4,7 @@ namespace Crater\Services;
 
 use Crater\Models\CompanySetting;
 use Crater\Models\Customer;
+use Crater\Models\Invoice;
 
 /**
  * SerialNumberFormatter
@@ -164,8 +165,9 @@ class SerialNumberFormatter
 
     public function setNextMonthSequenceNumber()
     {
+        $date = $this->model == Invoice::class ? "invoice_date" : "created_at";
         $last = $this->model::where('company_id', $this->company)
-            ->where("invoice_date", ">=", now()->startOfMonth())
+            ->where($date, ">=", now()->startOfMonth())
             ->count();
 
         $this->nextMonthSequenceNumber = $last + 1;
