@@ -167,6 +167,7 @@ class SerialNumberFormatter
     {
         $date = $this->model == Invoice::class ? "invoice_date" : "created_at";
         info($date);
+        info(Invoice::class);
         info($this->model);
         $last = $this->model::where('company_id', $this->company)
             ->where($date, ">=", now()->startOfMonth())
